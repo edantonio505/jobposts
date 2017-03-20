@@ -66,6 +66,10 @@
 
 @section('scripts')
 <script type="text/javascript">
+
+  /*---------------------------------------------------------------
+                    `CHANGING TABS
+  ------------------------------------------------------------*/
   $(".button_tab").click(function(e){
     e.preventDefault();
     var value = $(this).attr('data-target');
@@ -75,13 +79,21 @@
     $(".tab_selectable").hide();
     $("#"+value).show();
   });
+// -------------------------------------------------------------
 
 
 
+
+
+
+
+/*---------------------------------------------------------------
+                    Getting Jobs
+------------------------------------------------------------*/
   $.get('/api/jobposts/{{ $job->user->id }}', function(response){
     console.log(response);
   });
-
+// -------------------------------------------------------
 
 </script>
 @endsection

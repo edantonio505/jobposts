@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Jobpost;
+use Elasticsearch\ClientBuilder;
 use App\User;
 
 class PostController extends Controller

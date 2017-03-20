@@ -10,7 +10,9 @@ class Jobpost extends Model
   protected $fillable = [
     'description',
     'salary',
-    'views'
+    'views',
+    'title',
+    'description_sum'
   ];
 
 

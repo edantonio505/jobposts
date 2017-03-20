@@ -8,14 +8,6 @@ use Auth;
 class ProfileController extends Controller
 {
 
-
-
-
-
-
-
-
-
     /*-------------------------------------------
                         index
     ---------------------------------------------*/
