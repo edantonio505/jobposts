@@ -9,7 +9,7 @@
           <p><a href="{{ $job->user->linkedin }}">Linkedin</a></p>
           <p><a href="{{ $job->user->website }}">website</a></p>
           <p>{{ $job->description }}</p>
-          <p>salary: {{ $job->salary }}</p>
+          <p>salary: ${{ $job->salary }}</p>
           @if(Auth::user()->profile_type == 2)
             <a href="/job/application/{{ $job->id }}" class="btn btn-primary
               {{ (Auth::user()->checkIfApplied($job->id) ) ? 'disabled' : '' }}

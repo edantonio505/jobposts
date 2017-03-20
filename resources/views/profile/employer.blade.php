@@ -48,7 +48,7 @@
                   <tr>
                     <td>{{ $job->title }}</td>
                     <td>{{ substr($job->description, 0, 100) }}...</td>
-                    <td>{{ $job->salary }}</td>
+                    <td>${{ $job->salary }}</td>
                     <td>{{ $job->views }}</td>
                     <td> <a href="/applicants/{{ $job->id }}">{{ $job->applicants->count() }}</a></td>
                     <td>{{ $job->created_at  }}</td>
