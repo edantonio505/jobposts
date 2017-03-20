@@ -75,5 +75,13 @@
     $(".tab_selectable").hide();
     $("#"+value).show();
   });
+
+
+
+  $.get('/api/jobposts/{{ $job->user->id }}', function(response){
+    console.log(response);
+  });
+
+
 </script>
 @endsection

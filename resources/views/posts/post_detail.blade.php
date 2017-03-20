@@ -8,6 +8,7 @@
 
           <p><a href="{{ $job->user->linkedin }}">Linkedin</a></p>
           <p><a href="{{ $job->user->website }}">website</a></p>
+          <p>email: {{ $job->user->email }}</p>
           <p>{{ $job->description }}</p>
           <p>salary: ${{ $job->salary }}</p>
           @if(Auth::user()->profile_type == 2)

@@ -23,7 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('resume')->nullable();
             $table->string('website')->nullable();
             $table->string('glassdoor')->nullable();
+            $table->text('about')->nullable();
             $table->integer('jobpost_id')->nullable();
+            $table->string('phone')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

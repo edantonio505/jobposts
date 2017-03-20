@@ -20,6 +20,7 @@ class CreateJobpostsTable extends Migration
             $table->integer('views')->nullable();
             $table->integer('user_id');
             $table->string('title');
+            $table->string('description_sum');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Jobpost;
+use App\User;
 
 class PostController extends Controller
 {
@@ -169,4 +170,36 @@ class PostController extends Controller
 
 
     //*************************************************
+
+
+
+
+
+
+
+
+    /*-----------------------------------------------
+                        postsApi
+    ------------------------------------------------*/
+    /*
+     *
+     *
+     *
+    */
+    public function postsApi($id)
+    {
+          $jobs = User::findOrFail($id)->jobposts;
+          return response()->json($jobs);
+    }
+    # -----------------------------------------------
+
+
+
+
+
+
+
+
+
+    //************************************************
 }
