@@ -59,7 +59,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/profile">Profile</a></li>
+                                    <li><a href="/profile">Dashboard</a></li>
                                     <li><a href="/profile/{{ Auth::user()->id }}/edit">Edit Profile</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"

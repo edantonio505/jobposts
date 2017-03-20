@@ -56,7 +56,7 @@ class User extends Authenticatable
     */
     public function jobposts()
     {
-      return $this->hasMany('App\Jobpost', 'jobpost_id');
+      return $this->hasMany('App\Jobpost', 'user_id');
     }
     // ------------------------------------------------
 
@@ -68,4 +68,72 @@ class User extends Authenticatable
 
 
     // *********************************************
+
+
+
+
+
+
+
+
+
+
+
+    /*--------------------------------------------
+                    applied
+    --------------------------------------------*/
+    /**
+     *
+     *
+     *
+    */
+    public function applied()
+    {
+      return $this->belongsToMany('App\Jobpost', 'job_user', 'user_id', 'jobpost_id');
+    }
+    //-------------------------------------------------
+
+
+
+
+
+
+
+
+    //*************************************************
+
+
+
+
+
+
+
+
+
+
+
+    /*--------------------------------------------
+                    checkIfApplied
+    --------------------------------------------*/
+    /**
+     *
+     *
+     *
+    */
+    public function checkIfApplied($job_id)
+    {
+      $applied = $this->applied->where('id', $job_id)->first();
+      if(!$applied){return false;}
+      return true;
+    }
+    //-------------------------------------------------
+
+
+
+
+
+
+
+
+    //*************************************************
 }

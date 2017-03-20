@@ -3,18 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jobpost;
 
 class PagesController extends Controller
 {
-
-
-
-
-
-
-
-
-
     /*-------------------------------------------
                         index
     ---------------------------------------------*/
@@ -25,7 +17,8 @@ class PagesController extends Controller
     */
     public function index()
     {
-      return view('landing');
+      $posts = Jobpost::all();
+      return view('landing', ['jobposts' => $posts]);
     }
     // ------------------------------------------------
 

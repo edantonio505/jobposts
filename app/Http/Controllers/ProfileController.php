@@ -75,4 +75,70 @@ class ProfileController extends Controller
 
 
     // *********************************************
+
+
+
+
+
+
+
+
+
+    /*--------------------------------------------
+                    editProfile
+    --------------------------------------------*/
+    /**
+     *
+     *
+     *
+    */
+    public function editProfile($id)
+    {
+      return view('profile.editProfile');
+    }
+    //-------------------------------------------------
+
+
+
+
+
+
+
+
+    //*************************************************
+
+
+
+
+
+
+
+
+
+    /*--------------------------------------------
+                    postEditProfile
+    --------------------------------------------*/
+    /**
+     *
+     *
+     *
+    */
+    public function postEditProfile($id, Request $request)
+    {
+      $user = Auth::user();
+      $user->website = $request->input('website');
+      $user->linkedin = $request->input('linkedin');
+      $user->save();
+      return redirect('/profile');
+    }
+    //-------------------------------------------------
+
+
+
+
+
+
+
+
+    //*************************************************
 }

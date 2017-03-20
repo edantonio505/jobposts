@@ -11,8 +11,15 @@
 |
 */
 
+Route::get('/profile/{id}/edit', 'ProfileController@editProfile')->middleware('auth');
+Route::post('/profile/{id}/edit', 'ProfileController@postEditProfile')->middleware('auth');
+Route::get('/create_post', 'PostController@createPost')->middleware('auth');
+Route::post('/create_post', 'PostController@postCreatePost')->middleware('auth');
 Route::get('/', 'PagesController@index');
 Route::get('/test', 'PagesController@test');
-Route::get('/profile', 'ProfileController@index');
-Route::post('/change_user_type', 'ProfileController@changeType');
+Route::get('/profile', 'ProfileController@index')->middleware('auth');
+Route::post('/change_user_type', 'ProfileController@changeType')->middleware('auth');
+Route::get('/job/{id}', 'PostController@postDetail')->middleware('auth');
+Route::get('/job/application/{job_id}', 'PostController@apply');
+Route::get('/applicants/{job_id}', 'PostController@applicants')->middleware('auth');
 Auth::routes();

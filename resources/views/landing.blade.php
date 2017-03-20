@@ -10,6 +10,17 @@
 
 @section('content')
     <div class="container">
-      hahaha
+      <div class="container_design">
+        <div>
+            <ul>
+              @foreach($jobposts as $job)
+                <li>
+                  <a href="/job/{{$job->id}}">{{$job->title}}</a>
+                </li>
+              @endforeach
+
+            </ul>
+        </div>
+      </div>
     </div>
 @endsection

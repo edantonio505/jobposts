@@ -9,15 +9,9 @@
         min-height:400px;
         margin-top:30px;
         border:1px solid #d3e0e9;
-        border-radius: 10px;
-        box-shadow: 0px 0px 15px #bdbdbd !important;">
+        border-radius: 10px;">
         <div style="padding:15px;">
             <h1 style=" text-align:center;">Employer profile</h1>
-
-
-
-
-
 
             <ul class="nav nav-tabs">
               <li role="presentation" data-target="profile" class="button_tab active"><a href="#">Profile Details</a></li>
@@ -35,27 +29,32 @@
 
             <div id="job_posts" class="tab_selectable" style="display:none;">
               <div style="align-text:left; width: 100%; margin-top:15px;">
-                  <button class="btn btn-primary">Create Job Post</button>
+                  <a href="/create_post" class="btn btn-primary">Create Job Post</a>
               </div>
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Job</th>
-                    <th>sdf</th>
-                    <th>Age</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Salary</th>
+                    <th>Views</th>
+                    <th>Applicants</th>
+                    <th>Date Added</th>
                   </tr>
                 </thead>
                 <tbody>
+
+                  @foreach(Auth::user()->jobposts as $job)
                   <tr>
-                    <td>Jill</td>
-                    <td>Smith</td>
-                    <td>50</td>
+                    <td>{{ $job->title }}</td>
+                    <td>{{ substr($job->description, 0, 100) }}...</td>
+                    <td>{{ $job->salary }}</td>
+                    <td>{{ $job->views }}</td>
+                    <td> <a href="/applicants/{{ $job->id }}">{{ $job->applicants->count() }}</a></td>
+                    <td>{{ $job->created_at  }}</td>
                   </tr>
-                  <tr>
-                    <td>Eve</td>
-                    <td>Jackson</td>
-                    <td>94</td>
-                  </tr>
+                  @endforeach
+
                 </tbody>
 
               </table>
