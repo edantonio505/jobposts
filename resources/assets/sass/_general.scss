@@ -53,6 +53,9 @@ $border: #d3e0e9;
   background-color: #d5d5d5;
 }
 
+.table.table-hover tbody tr:hover{
+  cursor: pointer;
+}
 
 .container_design, .edit_profile_container {
   min-width: 10px;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 
 class ProfileController extends Controller
 {
@@ -20,7 +21,7 @@ class ProfileController extends Controller
     {
       $user = Auth::user();
       if($user->profile_type == 1){return view('profile.employer', ['user' => $user]);}
-      if($user->profile_type == 2){return view('profile.profile');}
+      if($user->profile_type == 2){return view('profile.profile', ['user' => $user]);}
       return view('profile.type');
     }
     // ------------------------------------------------
@@ -118,13 +119,54 @@ class ProfileController extends Controller
     public function postEditProfile($id, Request $request)
     {
       $user = Auth::user();
+      if($request->hasFile('resume'))
+      {
+        $file = $request->file('resume');
+        $filename = md5($user->name.time()).".".$file->extension();
+        $file->storeAs('resumes', $filename, 'public');
+      }
+
+
       $user->website = $request->input('website');
       $user->linkedin = $request->input('linkedin');
       $user->resume = $request->input('resume');
       $user->about = $request->input('about');
       $user->phone = $request->input('phone');
+      $user->resume = $filename;
       $user->save();
       return redirect('/profile');
+    }
+    //-------------------------------------------------
+
+
+
+
+
+
+
+
+    //*************************************************
+
+
+
+
+
+
+
+
+
+    /*--------------------------------------------
+                    applicantProfile
+    --------------------------------------------*/
+    /**
+     *
+     *
+     *
+    */
+    public function applicantProfile($id)
+    {
+      $user = User::findOrFail($id);
+      return view('profile.user_profile',['user' => $user]);
     }
     //-------------------------------------------------
 

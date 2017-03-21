@@ -6,7 +6,7 @@
     <div class="container">
       <div class="edit_profile_container">
         <h1 class="text-center"> Edit Profile</h1>
-        <form method="post" action="/profile/{{ Auth::user()->id }}/edit">
+        <form method="post" action="/profile/{{ Auth::user()->id }}/edit" enctype="multipart/form-data">
           {{ csrf_field() }}
         <div style="padding:15px;">
           <div class="form-group">

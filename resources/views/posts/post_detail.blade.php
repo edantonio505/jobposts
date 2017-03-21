@@ -7,8 +7,8 @@
       <h3 class="text-center">{{ $job->description_sum }}</h3>
       <div class="">
 
-          <p><a href="{{ $job->user->linkedin }}">Linkedin</a></p>
-          <p><a href="{{ $job->user->website }}">website</a></p>
+          <p><a href="http://{{ $job->user->linkedin }}">Linkedin</a></p>
+          <p><a href="http://{{ $job->user->website }}">website</a></p>
           <p>email: {{ $job->user->email }}</p>
           <p>{{ $job->description }}</p>
           <p>salary: ${{ $job->salary }}</p>

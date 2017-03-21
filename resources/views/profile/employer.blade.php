@@ -3,6 +3,14 @@
 @section('title', 'Profile')
 
 @section('content')
+
+    <style media="screen">
+        .sortable {
+          color: #3097D1;
+          cursor:pointer;
+        }
+    </style>
+
     <div class="container">
       <div style="
         background-color:white;
@@ -13,42 +21,48 @@
         <div style="padding:15px;">
             <h1 style=" text-align:center;">Employer profile</h1>
             <ul class="nav nav-tabs">
-              <li role="presentation" data-target="profile" class="button_tab active"><a href="#">Profile Details</a></li>
-              <li role="presentation" data-target="job_posts" class="button_tab"><a href="#">Job Posts</a></li>
+              <li role="presentation" data-target="profile" class="button_tab"><a href="#">Profile Details</a></li>
+              <li role="presentation" data-target="job_posts" class="button_tab active"><a href="#">Job Posts</a></li>
             </ul>
-            <div id="profile" class="tab_selectable">
+            <div id="profile" class="tab_selectable" style="display:none;">
               <div style="margin-top:15px;">
-                  {{ Auth::user()->name }}<br />
-                  {{ Auth::user()->website }}<br />
-                  {{ Auth::user()->linkedin }}
+                  Name: {{ Auth::user()->name }}<br />
+                  Website: {{ Auth::user()->website }}<br />
+                  Linkedin: {{ Auth::user()->linkedin }}
               </div>
             </div>
 
 
-            <div id="job_posts" class="tab_selectable" style="display:none;">
+            <div id="job_posts" class="tab_selectable">
 
               <div style="align-text:left; width: 100%; margin-top:15px;">
                   <a href="/create_post" class="btn btn-primary">Create Job Post</a>
               </div>
-              <table class="table">
+              <div style="float:right; position:relative; top: -35px;">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                <input v-model="searchQuery" />
+              </div>
+
+
+              <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th>Title</th>
+                    <th class="sortable" v-on:click="sortBy('title', filteredJobs)">Title</th>
                     <th>Description</th>
-                    <th>Salary</th>
-                    <th>Views</th>
-                    <th>Applicants</th>
-                    <th>Date Added</th>
+                    <th class="sortable" v-on:click="sortBy('salary', filteredJobs)">Salary</th>
+                    <th class="sortable" v-on:click="sortBy('views', filteredJobs)">Views</th>
+                    <th class="sortable" v-on:click="sortBy('applicants', filteredJobs)">Applicants</th>
+                    <th class="sortable" v-on:click="sortBy('created_at', filteredJobs)">Date Added</th>
                   </tr>
 
                 </thead>
                 <tbody>
-                  <tr v-for="job in jobs">
+                  <tr v-for="job in filteredJobs" v-on:click="checkJobpost(job.id)">
                     <td>@{{ job.title }}</td>
                     <td>@{{ job.description | summary }}...</td>
                     <td>@{{ job.salary }}</td>
                     <td>@{{ job.views }}</td>
-                    <td><a v-bind:href="'/applicants/'+job.id" >@{{ job.applicants.length }}</a></td>
+                    <td>@{{ job.applicants.length }}</td>
                     <td>@{{ job.created_at | date }}</td>
                   </tr>
                 </tbody>
@@ -93,7 +107,47 @@ function renderJobs(response)
   var app = new Vue({
     el: "#job_posts",
     data: {
+      searchQuery: '',
+      asc: true,
       jobs: response
+    },
+    methods: {
+      checkJobpost: function(id){
+        window.location.href = '/jobpost/'+id;
+      },
+      sortBy: function(key, filteredJobs){
+      filteredJobs.sort(function(a,b)
+        {
+            if(key == 'salary' || key == 'views'){
+              var numA = Number(a[key]);
+              var numB = Number(b[key]);
+              if(numA > b[key]){return numA - numB;}
+              if(numA < b[key]){return numB - numA;}
+            }
+
+            if(key == 'title'){
+              var nameA = a[key].toUpperCase();
+              var nameB = b[key].toUpperCase();
+              return 1;
+            }
+
+            if(key == 'applicants'){
+              var va = a[key].length;
+              var vb = b[key].length;
+              if(va > vb){return va - vb;}
+              if(va < vb){return vb - va;}
+            }
+
+            if(key == 'created_at')
+            {
+              var dateA = Number(new Date(a[key]).getTime() / 1000);
+              var dateB = Number(new Date(a[key]).getTime() / 1000);
+              if((dateA) > dateB){return dateA - dateB;}
+              if(dateA < dateB){return dateB - dateA;}
+            }
+
+        });
+      }
     },
     filters: {
       date: function(value){
@@ -103,6 +157,23 @@ function renderJobs(response)
       },
       summary: function(value){
         return value.substring(1, 60);
+      }
+    },
+    computed: {
+      filteredJobs: function(){
+        var jobs = this.jobs;
+        var sortKey = this.sortKey;
+        var searchQuery = this.searchQuery;
+        var asc = this.asc;
+        if(searchQuery != '')
+        {
+          jobs = jobs.filter(function(job){
+              return Object.keys(job).some(function (key) {
+							         return String(job[key]).toLowerCase().indexOf(searchQuery.toLowerCase()) > -1;
+				      })
+          });
+        }
+        return jobs;
       }
     }
   });

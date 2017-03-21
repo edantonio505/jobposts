@@ -59,7 +59,13 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/profile">Dashboard</a></li>
+
+                                    @if(Auth::user()->profile_type == 2)
+                                      <li><a href="/profile">Profile</a></li>
+                                    @else
+                                      <li><a href="/profile">Dashboard</a></li>
+                                    @endif
+
                                     <li><a href="/profile/{{ Auth::user()->id }}/edit">Edit Profile</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
