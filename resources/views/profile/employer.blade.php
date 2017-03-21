@@ -136,8 +136,8 @@ function renderJobs(response)
             }
 
             if(key == 'applicants'){
-              var va = a[key].length;
-              var vb = b[key].length;
+              var va = Number(a[key].length);
+              var vb = Number(b[key].length);
               if(va > vb){return va - vb;}
               if(va < vb){return vb - va;}
             }
