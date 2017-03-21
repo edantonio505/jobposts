@@ -132,7 +132,11 @@ function renderJobs(response)
            else if(key == 'title'){
               var nameA = a[key].toUpperCase();
               var nameB = b[key].toUpperCase();
-              return true;
+              if(nameA > nameB )
+		{
+			return 1;	
+		}
+
             }
 
             else if(key == 'applicants'){
