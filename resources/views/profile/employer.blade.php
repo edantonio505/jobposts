@@ -118,8 +118,8 @@ function renderJobs(response)
       filteredJobs.sort(function(a,b)
         {
             if(key == 'salary' || key == 'views'){
-              var numA = Number(a[key]);
-              var numB = Number(b[key]);
+              var numA = (+Number(a[key]));
+              var numB = (+Number(b[key]));
               if(numA > b[key]){return numA - numB;}
               if(numA < b[key]){return numB - numA;}
             }
@@ -131,16 +131,16 @@ function renderJobs(response)
             }
 
             if(key == 'applicants'){
-              var va = a[key].length;
-              var vb = b[key].length;
+              var va = (+a[key].length);
+              var vb = (+b[key].length);
               if(va > vb){return va - vb;}
               if(va < vb){return vb - va;}
             }
 
             if(key == 'created_at')
             {
-              var dateA = Number(new Date(a[key]).getTime() / 1000);
-              var dateB = Number(new Date(a[key]).getTime() / 1000);
+              var dateA = (+Number(new Date(a[key]).getTime() / 1000));
+              var dateB = (+Number(new Date(a[key]).getTime() / 1000));
               if((dateA) > dateB){return dateA - dateB;}
               if(dateA < dateB){return dateB - dateA;}
             }
