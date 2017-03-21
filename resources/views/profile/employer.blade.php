@@ -79,7 +79,7 @@
 
 var filterInt = function(value) {
 if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
-  return Number(value);
+  return Number(value, 10);
 return NaN;
 }
 
@@ -119,30 +119,30 @@ function renderJobs(response)
         window.location.href = '/jobpost/'+id;
       },
       sortBy: function(key, filteredJobs){
-      filteredJobs.sort(function(a,b)
+      filteredJobs = filteredJobs.sort(function(a,b)
         {
             if(key == 'salary' || key == 'views'){
               var numA = (a[key] != null ? a[key] : 0);
               var numB = (b[key] != null ? b[key] : 0);
 
-              if(parseInt(numA,10) > parseInt(numB,10)){return filterInt(numA) -filterInt(numB);}
-              if(parseInt(numA,10) < parseInt(numB,10)){return filterInt(numB) - filterInt(numA);}
+              if(parseFloat(numA) > parseFloat(numB)){return parseFloat(numA) - parseFloat(numB);}
+              if(parseFloat(numA) < parseFloat(numB)){return parseFloat(numB) - parseFloat(numA);}
             }
 
-            if(key == 'title'){
+           else if(key == 'title'){
               var nameA = a[key].toUpperCase();
               var nameB = b[key].toUpperCase();
-              return a > b ? true : false;
+              return true;
             }
 
-            if(key == 'applicants'){
+            else if(key == 'applicants'){
               var va = Number(a[key].length);
               var vb = Number(b[key].length);
               if(va > vb){return va - vb;}
               if(va < vb){return vb - va;}
             }
 
-            if(key == 'created_at')
+            else if(key == 'created_at')
             {
               var dateA = Number(new Date(a[key]).getTime() / 1000);
               var dateB = Number(new Date(a[key]).getTime() / 1000);
