@@ -119,13 +119,13 @@ class ProfileController extends Controller
     public function postEditProfile($id, Request $request)
     {
       $user = Auth::user();
+      $filename = '';
       if($request->hasFile('resume'))
       {
         $file = $request->file('resume');
         $filename = md5($user->name.time()).".".$file->extension();
         $file->storeAs('resumes', $filename, 'public');
       }
-
 
       $user->website = $request->input('website');
       $user->linkedin = $request->input('linkedin');
