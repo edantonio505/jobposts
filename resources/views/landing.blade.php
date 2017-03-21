@@ -15,7 +15,7 @@
             <ul>
               @foreach($jobposts as $job)
                 <li>
-                  <a href="/job/{{$job->id}}">{{$job->title}}</a>
+                  <a href="/job/{{$job->id}}">{{$job->title}}   {{ $job->description_sum }}</a> 
                 </li>
               @endforeach
 

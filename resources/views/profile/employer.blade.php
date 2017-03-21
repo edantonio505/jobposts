@@ -12,12 +12,10 @@
         border-radius: 10px;">
         <div style="padding:15px;">
             <h1 style=" text-align:center;">Employer profile</h1>
-
             <ul class="nav nav-tabs">
               <li role="presentation" data-target="profile" class="button_tab active"><a href="#">Profile Details</a></li>
               <li role="presentation" data-target="job_posts" class="button_tab"><a href="#">Job Posts</a></li>
             </ul>
-
             <div id="profile" class="tab_selectable">
               <div style="margin-top:15px;">
                   {{ Auth::user()->name }}<br />
@@ -28,6 +26,7 @@
 
 
             <div id="job_posts" class="tab_selectable" style="display:none;">
+
               <div style="align-text:left; width: 100%; margin-top:15px;">
                   <a href="/create_post" class="btn btn-primary">Create Job Post</a>
               </div>
@@ -41,22 +40,18 @@
                     <th>Applicants</th>
                     <th>Date Added</th>
                   </tr>
+
                 </thead>
                 <tbody>
-
-                  @foreach(Auth::user()->jobposts as $job)
-                  <tr>
-                    <td>{{ $job->title }}</td>
-                    <td>{{ substr($job->description, 0, 100) }}...</td>
-                    <td>${{ $job->salary }}</td>
-                    <td>{{ $job->views }}</td>
-                    <td> <a href="/applicants/{{ $job->id }}">{{ $job->applicants->count() }}</a></td>
-                    <td>{{ $job->created_at  }}</td>
+                  <tr v-for="job in jobs">
+                    <td>@{{ job.title }}</td>
+                    <td>@{{ job.description | summary }}...</td>
+                    <td>@{{ job.salary }}</td>
+                    <td>@{{ job.views }}</td>
+                    <td><a v-bind:href="'/applicants/'+job.id" >@{{ job.applicants.length }}</a></td>
+                    <td>@{{ job.created_at | date }}</td>
                   </tr>
-                  @endforeach
-
                 </tbody>
-
               </table>
             </div>
         </div>
@@ -66,6 +61,10 @@
 
 @section('scripts')
 <script type="text/javascript">
+
+
+
+
 
   /*---------------------------------------------------------------
                     `CHANGING TABS
@@ -85,13 +84,44 @@
 
 
 
+/*---------------------------------------------------------------
+                  `CHANGING TABS
+------------------------------------------------------------*/
+function renderJobs(response)
+{
+  // console.log(response);
+  var app = new Vue({
+    el: "#job_posts",
+    data: {
+      jobs: response
+    },
+    filters: {
+      date: function(value){
+        date = value.split(' ')[0].split('-');
+        result = date[1]+'/'+date[2]+'/'+date[0];
+        return result;
+      },
+      summary: function(value){
+        return value.substring(1, 60);
+      }
+    }
+  });
+
+}
+// ------------------------------------------------------------
+
+
+
+
+
+
 
 
 /*---------------------------------------------------------------
                     Getting Jobs
 ------------------------------------------------------------*/
-  $.get('/api/jobposts/{{ $job->user->id }}', function(response){
-    console.log(response);
+  $.get('/api/jobposts/{{ $user->id }}', function(response){
+    renderJobs(response);
   });
 // -------------------------------------------------------
 

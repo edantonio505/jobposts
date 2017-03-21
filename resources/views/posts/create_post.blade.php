@@ -14,6 +14,12 @@
             <label for="title">Title</label>
             <input type="text" class="form-control" name="title">
           </div>
+
+          <div class="form-group">
+            <label for="description_sum">Description Summary</label>
+            <input type="text" class="form-control" name="description_sum" />
+          </div>
+
           <div class="form-group">
             <label for="description">Description</label>
             <textarea class="form-control" name="description" rows="5" cols="20"></textarea>

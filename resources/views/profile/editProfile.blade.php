@@ -28,6 +28,28 @@
             >
           </div>
 
+          <div class="form-group">
+            <label for="">Phone</label>
+            <input type="text" name="phone" class="form-control"
+            @if(Auth::user()->phone != '')
+              value="{{ Auth::user()->phone }}"
+            @endif
+            />
+          </div>
+
+          @if(Auth::user()->profile_type == 2)
+            <div class="form-group">
+              <label for="">About</label>
+              <textarea class="form-control" name="about" rows="3" cols="80">{{ Auth::user()->about }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="">Resume</label>
+                <input type="file" name="resume" class="form-control"
+                >
+            </div>
+          @endif
+
 
           <input type="submit" class="btn btn-block btn-primary" value="Edit Profile">
         </div>

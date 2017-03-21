@@ -56,6 +56,7 @@ class PostController extends Controller
       $jobpost->description = $request->input('description');
       $jobpost->salary = $request->input('salary');
       $jobpost->title = $request->input('title');
+      $jobpost->description_sum = $request->input('description_sum');
       Auth::user()->jobposts()->save($jobpost);
       return redirect('/profile');
     }
@@ -189,10 +190,10 @@ class PostController extends Controller
     */
     public function postsApi($id)
     {
-          $jobs = User::findOrFail($id)->jobposts;
+          $jobs = Jobpost::where('user_id', $id)->with('applicants')->get();
           return response()->json($jobs);
     }
-    # -----------------------------------------------
+    // -----------------------------------------------
 
 
 

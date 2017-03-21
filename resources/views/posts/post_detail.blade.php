@@ -4,6 +4,7 @@
 <div class="container">
     <div class="container_design">
       <h1 class="text-center">{{ $job->title }}</h1>
+      <h3 class="text-center">{{ $job->description_sum }}</h3>
       <div class="">
 
           <p><a href="{{ $job->user->linkedin }}">Linkedin</a></p>

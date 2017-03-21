@@ -19,7 +19,7 @@ class ProfileController extends Controller
     public function index()
     {
       $user = Auth::user();
-      if($user->profile_type == 1){return view('profile.employer');}
+      if($user->profile_type == 1){return view('profile.employer', ['user' => $user]);}
       if($user->profile_type == 2){return view('profile.profile');}
       return view('profile.type');
     }
@@ -120,6 +120,9 @@ class ProfileController extends Controller
       $user = Auth::user();
       $user->website = $request->input('website');
       $user->linkedin = $request->input('linkedin');
+      $user->resume = $request->input('resume');
+      $user->about = $request->input('about');
+      $user->phone = $request->input('phone');
       $user->save();
       return redirect('/profile');
     }
