@@ -77,7 +77,11 @@
 <script type="text/javascript">
 
 
-
+var filterInt = function(value) {
+if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
+  return Number(value);
+return NaN;
+}
 
 
   /*---------------------------------------------------------------
@@ -118,10 +122,11 @@ function renderJobs(response)
       filteredJobs.sort(function(a,b)
         {
             if(key == 'salary' || key == 'views'){
-              var numA = (+Number(a[key]));
-              var numB = (+Number(b[key]));
-              if(numA > b[key]){return numA - numB;}
-              if(numA < b[key]){return numB - numA;}
+              var numA = (a[key] != null ? a[key] : 0);
+              var numB = (b[key] != null ? b[key] : 0);
+
+              if(parseInt(numA,10) > parseInt(numB,10)){return filterInt(numA) -filterInt(numB);}
+              if(parseInt(numA,10) < parseInt(numB,10)){return filterInt(numB) - filterInt(numA);}
             }
 
             if(key == 'title'){
@@ -131,16 +136,16 @@ function renderJobs(response)
             }
 
             if(key == 'applicants'){
-              var va = (+a[key].length);
-              var vb = (+b[key].length);
+              var va = a[key].length;
+              var vb = b[key].length;
               if(va > vb){return va - vb;}
               if(va < vb){return vb - va;}
             }
 
             if(key == 'created_at')
             {
-              var dateA = (+Number(new Date(a[key]).getTime() / 1000));
-              var dateB = (+Number(new Date(a[key]).getTime() / 1000));
+              var dateA = Number(new Date(a[key]).getTime() / 1000);
+              var dateB = Number(new Date(a[key]).getTime() / 1000);
               if((dateA) > dateB){return dateA - dateB;}
               if(dateA < dateB){return dateB - dateA;}
             }
