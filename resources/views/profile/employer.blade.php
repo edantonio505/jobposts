@@ -57,7 +57,7 @@
 
                 </thead>
                 <tbody>
-                  <tr v-for="job in filteredJobs" v-on:click="checkJobpost(job.id)">
+                  <tr v-for="job in filteredJobs" :key="job.id" v-on:click="checkJobpost(job.id)">
                     <td>@{{ job.title }}</td>
                     <td>@{{ job.description | summary }}...</td>
                     <td>@{{ job.salary }}</td>
