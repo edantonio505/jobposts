@@ -21,7 +21,9 @@
               &nbsp;&nbsp;&nbsp;
               {{ $user->email }}
               &nbsp;&nbsp;&nbsp;
-              <a href="{{ asset('storage/resumes/'.$user->resume) }}">Resume</a>
+              @if($user->resume != '')
+                <a href="{{ asset('storage/resumes/'.$user->resume) }}">Resume</a>
+              @endif
             </p>
         </div>
       </div>

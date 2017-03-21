@@ -17,7 +17,9 @@
             <li>{{ $user->website }}</li>
             <li>{{ $user->email }}</li>
             <li>{{ $user->phone }}</li>
+            @if($user->resume != '')
             <li><a href="{{ asset('storage/resumes/'.$user->resume) }}">Resume</a></li>
+            @endif
           </ul>
         </div>
       </div>

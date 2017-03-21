@@ -108,7 +108,6 @@ function renderJobs(response)
     el: "#job_posts",
     data: {
       searchQuery: '',
-      asc: true,
       jobs: response
     },
     methods: {
@@ -162,9 +161,7 @@ function renderJobs(response)
     computed: {
       filteredJobs: function(){
         var jobs = this.jobs;
-        var sortKey = this.sortKey;
         var searchQuery = this.searchQuery;
-        var asc = this.asc;
         if(searchQuery != '')
         {
           jobs = jobs.filter(function(job){
