@@ -24,9 +24,15 @@
             <label for="description">Description</label>
             <textarea class="form-control" name="description" rows="5" cols="20"></textarea>
           </div>
+
           <div class="form-group">
             <label for="salary">Salary</label>
-            <input type="number" class="form-control" name="salary">
+            $ <input type="number" class="form-control" name="salary">
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" name="location">
           </div>
 
           <input type="submit" class="btn btn-primary btn-block"  value="Create Post">

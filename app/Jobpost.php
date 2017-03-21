@@ -12,7 +12,8 @@ class Jobpost extends Model
     'salary',
     'views',
     'title',
-    'description_sum'
+    'description_sum',
+    'location'
   ];
 
 

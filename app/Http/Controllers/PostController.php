@@ -56,6 +56,7 @@ class PostController extends Controller
       $jobpost->description = $request->input('description');
       $jobpost->salary = $request->input('salary');
       $jobpost->title = $request->input('title');
+      $jobpost->location = $request->input('location');
       $jobpost->description_sum = $request->input('description_sum');
       Auth::user()->jobposts()->save($jobpost);
       return redirect('/profile');
@@ -194,6 +195,38 @@ class PostController extends Controller
           return response()->json($jobs);
     }
     // -----------------------------------------------
+
+
+
+
+
+
+
+
+
+    //************************************************
+
+
+
+
+
+
+
+
+    /*-----------------------------------------------
+                        jobposts
+    ------------------------------------------------*/
+    /*
+     *
+     *
+     *
+    */
+    public function jobposts()
+    {
+        $jobposts = Jobpost::all();
+        return response()->json($jobposts);
+    }
+    # -----------------------------------------------
 
 
 

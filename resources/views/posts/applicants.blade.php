@@ -4,10 +4,10 @@
 <div class="container">
     <div class="container_design">
       <h1 class="text-center">{{ $job->title }}</h1>
-
-
+      <h3 class="text-center">{{ $job->description_sum }}</h3>
       <div>
-        <p>{{ $job->description }}</p>
+        <a href="/profile" style="padding-bottom: 20px;">Go to Dashboard</a>
+        <p class="margin-top:20px;">{{ $job->description }}</p>
         <h3>Salary: ${{ $job->salary }}</h3>
 
         <h2 class="text-center">Applicants</h2>

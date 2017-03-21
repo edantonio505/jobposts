@@ -21,6 +21,7 @@ class CreateJobpostsTable extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->string('description_sum');
+            $table->string('location');
             $table->timestamps();
         });
     }

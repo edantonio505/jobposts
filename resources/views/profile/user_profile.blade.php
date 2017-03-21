@@ -6,10 +6,11 @@
     <div class="container">
       <div class="container_design">
         <h1 class="text-center">{{ $user->name }}</h1>
-        @if(Auth::user()->profile_type == 1)
-          <a href="/profile" style="margin-left:15px;" class="btn btn-primary">Dashboard</a>
-        @endif
+
         <div>
+          @if(Auth::user()->profile_type == 1)
+            <a href="/profile" style="padding-bottom: 20px;">Go to Dashboard</a>
+          @endif
             <h4>About</h4>
             <p>{{ $user->about }}</p>
             <p>
