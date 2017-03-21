@@ -125,14 +125,6 @@ function renderJobs(response)
               var numA = (a[key] != null ? a[key] : 0);
               var numB = (b[key] != null ? b[key] : 0);
 
-              if(String(numA).substring(0, 1) == "1") {
-                numA = 0;
-              }
-              if(String(numB).substring(0,1)== "1")
-              {
-                numB = 0;
-              }
-
               if(parseInt(numA,10) > parseInt(numB,10)){return filterInt(numA) -filterInt(numB);}
               if(parseInt(numA,10) < parseInt(numB,10)){return filterInt(numB) - filterInt(numA);}
             }
@@ -140,7 +132,7 @@ function renderJobs(response)
             if(key == 'title'){
               var nameA = a[key].toUpperCase();
               var nameB = b[key].toUpperCase();
-              return nameA > nameB ? 1 : 0;
+              return a > b ? true : false;
             }
 
             if(key == 'applicants'){
