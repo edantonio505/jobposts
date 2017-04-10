@@ -10,6 +10,11 @@
 
 @section('content')
     <div class="container" id="app">
+	<div style="margin:16px;">
+        	<p><b>Admin:</b> testadmin1@email.com<br /> <b>Password:</b> abc123</p>
+		<hr />
+		<p><b>User:</b> testuser1@email.com <br /> <b>Password:</b> abc123</p>
+        </div>
       <input type="text" class="form-control" placeholder="Search Jobs" v-model="searchQuery">
       <div class="container_design">
         <div id="loader">
